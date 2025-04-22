@@ -1,0 +1,54 @@
+---
+import PageLayout from '@layouts/PageLayout.astro'
+import PocketBase from 'pocketbase'
+
+import config from '../../config'
+
+export async function getStaticPaths() {
+  const pb = new PocketBase(config.apiBaseUrl)
+  const signs = await pb.collection('sign').getFullList()
+  return signs.map(sign => ({
+    params: { sign: sign.slug },
+  }))
+}
+
+const { sign } = Astro.params
+
+const pb = new PocketBase(config.apiBaseUrl)
+const record = await pb.collection('sign').getFirstListItem(`slug="${sign}"`, {
+  fields: 'id, name, slug, expand.Category.*',
+  expand: 'Category',
+})
+console.log(record)
+const videoUrl =
+  '/src/videos/' + record.slug + '.mp4'
+---
+
+<PageLayout>
+  <div>
+    <h1 class="text-5xl mb-8 font-display text-primary">{record.name}</h1>
+    <div class="grid grid-cols-12 gap-4">
+      <div class="card card-md col-span-12 md:col-span-6 shadow-sm">
+        <div class="card-body">
+          <video autoplay controls>
+            <source src={videoUrl} type="video/mp4" />
+          </video>
+        </div>
+      </div>
+      <div class="col-span-12 md:col-span-6">
+        <h2>Catégorie</h2>
+        <ul>
+          {
+            record.expand?.Category.map((category: any) => (
+              <li class="py-1">
+                <div class="badge badge-outline badge-accent hover:badge-ghost">
+                  <a href={`/categories/${category.slug}`}>{category.tag}</a>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</PageLayout>

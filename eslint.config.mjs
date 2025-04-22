@@ -1,10 +1,16 @@
 import gitignore from 'eslint-config-flat-gitignore'
-import jota from 'eslint-config-jota'
+import jota, { easier } from 'eslint-config-jota'
 import eslintPluginAstro from 'eslint-plugin-astro'
 import tseslint from 'typescript-eslint'
+
+const ignores = tseslint.config({
+  ignores: ['pb/**/*'],
+})
 
 export default tseslint.config(
   gitignore(),
   ...jota,
-  ...eslintPluginAstro.configs.recommended
+  ...easier,
+  ...eslintPluginAstro.configs.recommended,
+  ...ignores
 )

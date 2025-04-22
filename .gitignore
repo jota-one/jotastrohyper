@@ -22,3 +22,8 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# custom files
+pb/pb_data
+pb/pocketbase
+videos

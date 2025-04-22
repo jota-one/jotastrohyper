@@ -1,0 +1,68 @@
+---
+import PageLayout from '@layouts/PageLayout.astro'
+import PocketBase from 'pocketbase'
+import image from '@images/teach.png'
+
+import config from '../../config'
+
+const pb = new PocketBase(config.apiBaseUrl)
+const categories = await pb.collection('category').getFullList({
+    fields: 'id, tag, slug, expand.category_via_Parent.*',
+    sort: 'tag',
+    filter: 'Parent = null',
+    expand: 'category_via_Parent',
+})
+
+console.log(categories)
+---
+
+<PageLayout>
+  <div>
+    <h1 class="text-5xl mb-8 font-display text-primary">Toutes les catégories</h1>
+    <div class="grid grid-cols-12 gap-4">
+        <div class="col-span-12 md:col-span-6">
+            {
+                categories.map(cat => (
+                    <h2 class="text-2xl mb-4 font-display text-primary">
+                        {cat.tag}
+                        <ul class="list bg-base-100 rounded-box shadow-md">
+                            {
+                                cat.expand?.category_via_Parent.map((subcategory: any) => (
+                                <li class="list-row">
+                                    <div>
+                                    <img
+                                        class="size-10 rounded-box"
+                                        src="https://img.daisyui.com/images/profile/demo/1@94.webp"
+                                    />
+                                    </div>
+                                    <div>
+                                    <div class="text-xs uppercase font-semibold opacity-60">
+                                        {subcategory.tag}
+                                    </div>
+                                    </div>
+                                    <a href={`/categories/${subcategory.slug}`} class="btn btn-square btn-ghost">
+                                    <i class="i-fa-solid-play-circle text-2xl"></i>
+                                    </a>
+                                </li>
+                                ))
+                            }
+                        </ul>
+                    </h2>
+                ))
+            }
+        </div>
+        <div class="card card-md col-span-12 md:col-span-6 shadow-sm">
+            <div class="card-body">
+                <img
+                src={image.src}
+                alt="À propos de moi"
+                class="max-w-sm rounded-lg shadow-2xl"
+            />
+                <p>
+                    Explorez les différentes catégories de signes disponibles dans le lexique.
+                </p>
+            </div>
+        </div>
+    </div>
+  </div>
+</PageLayout>
