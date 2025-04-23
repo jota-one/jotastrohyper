@@ -1,15 +1,30 @@
 {
   "extends": "astro/tsconfigs/strict",
-  "include": ["**/*", ".astro/**/*.mjs"],
-  "exclude": ["dist"],
+  "include": [
+    "**/*",
+    ".astro/**/*.mjs"
+  ],
+  "exclude": [
+    "dist",
+    "pb"
+  ],
   "compilerOptions": {
     "verbatimModuleSyntax": true,
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["src/components/*"],
-      "@layouts/*": ["src/layouts/*"],
-      "@styles/*": ["src/styles/*"],
-      "@images/*": ["src/assets/*"]
-    }
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@layouts/*": [
+        "src/layouts/*"
+      ],
+      "@styles/*": [
+        "src/styles/*"
+      ],
+      "@images/*": [
+        "src/assets/*"
+      ]
+    },
+    "jsx": "preserve"
   }
 }

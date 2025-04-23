@@ -16,12 +16,12 @@ const { sign } = Astro.params
 
 const pb = new PocketBase(config.apiBaseUrl)
 const record = await pb.collection('sign').getFirstListItem(`slug="${sign}"`, {
-  fields: 'id, name, slug, expand.Category.*',
+  fields: 'id, name, video, slug, expand.Category.*',
   expand: 'Category',
 })
 console.log(record)
 const videoUrl =
-  '/src/videos/' + record.slug + '.mp4'
+  `${config.apiBaseUrl}/api/files/sign/${record.id}/${record.video}`
 ---
 
 <PageLayout>
