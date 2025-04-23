@@ -1,4 +1,5 @@
 ---
+import Login from '@components/Login.vue';
 import '@fontsource-variable/oswald'
 import '@styles/global.css'
 const { navBg = 'bg-transparent' } = Astro.props;
@@ -47,10 +48,7 @@ const navClasses =
         </form>
       </div>
       <div class="hidden lg:flex gap-5">
-        <button
-          class="btn btn-primary px-5 py-2 font-semibold rounded-lg cursor-pointer"
-          >Login</button
-        >
+        <Login client:load />
         <button
           class="border border-white text-white px-5 py-2 font-semibold rounded-lg cursor-pointer hover:opacity-80"
           >SignUp</button
