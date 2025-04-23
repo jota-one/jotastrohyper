@@ -4,6 +4,8 @@ import { defineConfig } from 'astro/config'
 
 import vue from '@astrojs/vue';
 
+import node from '@astrojs/node';
+
 // https://astro.build/config
 export default defineConfig({
   vite: {
@@ -11,6 +13,9 @@ export default defineConfig({
   },
 
   integrations: [vue()],
+  outDir: 'pb/pb_public',
 
-  outDir: 'pb/pb_public'
+  adapter: node({
+    mode: 'standalone'
+  })
 })

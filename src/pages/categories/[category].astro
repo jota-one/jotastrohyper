@@ -4,6 +4,8 @@ import PocketBase from 'pocketbase'
 
 import config from '../../config'
 
+export const prerender = false
+
 export async function getStaticPaths() {
   const pb = new PocketBase(config.apiBaseUrl)
   const signs = await pb.collection('category').getFullList()

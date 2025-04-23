@@ -5,6 +5,8 @@ import image from '@images/teach.png'
 
 import config from '../../config'
 
+export const prerender = false
+
 const pb = new PocketBase(config.apiBaseUrl)
 const categories = await pb.collection('category').getFullList({
     fields: 'id, tag, slug, expand.category_via_Parent.*',
