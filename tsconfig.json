@@ -1,7 +1,7 @@
 {
   "extends": "astro/tsconfigs/strict",
   "include": ["**/*", ".astro/**/*.mjs"],
-  "exclude": ["dist"],
+  "exclude": ["dist", "pb"],
   "compilerOptions": {
     "verbatimModuleSyntax": true,
     "baseUrl": ".",
