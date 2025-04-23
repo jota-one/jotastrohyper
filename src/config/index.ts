@@ -1,3 +1,3 @@
 export default {
-  apiBaseUrl: 'http://127.0.0.1:8090',
+  apiBaseUrl: import.meta.env.PUBLIC_PB_BASE_URI,
 }
