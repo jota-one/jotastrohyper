@@ -11,4 +11,6 @@ export default defineConfig({
   },
 
   integrations: [vue()],
+
+  outDir: 'pb/pb_public'
 })

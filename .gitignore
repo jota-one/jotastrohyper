@@ -25,5 +25,6 @@ pnpm-debug.log*
 
 # custom files
 pb/pb_data
+pb/pb_public
 pb/pocketbase
 videos
