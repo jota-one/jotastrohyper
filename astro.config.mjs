@@ -10,12 +10,15 @@ import node from '@astrojs/node';
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
+    ssr: {
+      noExternal: ['vue', 'pocketbase'],
+    },
   },
 
   integrations: [vue()],
   outDir: 'pb/pb_public',
 
   adapter: node({
-    mode: 'standalone'
+    mode: 'standalone',
   })
 })
